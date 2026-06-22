@@ -2,6 +2,25 @@
 <html lang="da">
 <head>
 <meta charset="UTF-8">
+<script>
+/* Konvergens 2026-06-22: denne flade (-lokal) er retireret. Param-bevarende
+   redirect til den kanoniske, hærdede flade på skemaer.mycel.dk. Bærer hele
+   query-strengen (?s / ?d / ?t m.fl.) + hash 1:1 videre, så et udsendt klient-link
+   lander uændret på den nye flade. Flag (accepteret tradeoff): en klient der er
+   MIDT i et skema her mister sin localStorage ved cross-origin redirect (få
+   tilfælde); nye åbninger af et -lokal-link er 100% sikre. Kør først i <head> →
+   resten af siden indlæses aldrig. */
+(function () {
+  try {
+    var maal = 'https://skemaer.mycel.dk/'
+      + (window.location.search || '')
+      + (window.location.hash || '');
+    window.location.replace(maal);
+  } catch (e) {
+    window.location.href = 'https://skemaer.mycel.dk/';
+  }
+})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Udfyld dine forberedelses-skemaer sikkert i din browser. Dine svar krypteres lokalt og deles kun med din psykolog.">
 <meta name="author" content="Viktor Nielsen, Mentem Psykologpraksis">
